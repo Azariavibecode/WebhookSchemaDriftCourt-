@@ -34,4 +34,6 @@ python -m pytest -q
 
 Target runtime: GenLayer `0.2.16`; deployment target: StudioNet chain ID `61999`.
 
+Live StudioNet contract: [`0xD0811B9873d579fAA18B64a9b47fF2BC6e0aEe31`](https://explorer-studio.genlayer.com/address/0xD0811B9873d579fAA18B64a9b47fF2BC6e0aEe31). Its deployed source is byte-for-byte identical to this repository. See the [StudioNet lifecycle evidence](verification/studionet-verification.md).
+
 See [architecture](docs/ARCHITECTURE.md), [threat model](docs/THREAT_MODEL.md), [fixture manifest](verification/fixture-manifest.md), and [local verification](verification/local-verification.md).
