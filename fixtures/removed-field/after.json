@@ -1,0 +1,1 @@
+{"event":"payment.completed","type":"object","required":["data"],"properties":{"data":{"type":"object","required":["customer"],"properties":{"customer":{"type":"object","properties":{"email":{"type":"string"}}}}}}}

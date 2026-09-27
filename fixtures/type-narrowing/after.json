@@ -1,0 +1,1 @@
+{"event":"shipment.updated","type":"object","properties":{"data":{"type":"object","properties":{"status":{"type":"string","enum":["queued","sent"]}}}}}
