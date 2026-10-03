@@ -22,7 +22,7 @@ Slots:
 
 Verdicts: `COMPATIBLE`, `BREAKING_CHANGE`, `MIGRATION_REQUIRED`, and fail-closed `SOURCE_UNVERIFIED`.
 
-`BREAKING_CHANGE` is accepted only when the same event is being compared, the consumer depends on the target, and the change is not backward-compatible. `MIGRATION_REQUIRED` additionally requires documented migration guidance.
+`COMPATIBLE` is accepted only when the before/after snapshots describe the same event and the change is backward-compatible. `BREAKING_CHANGE` is accepted only when the same event is being compared, the consumer depends on the target, and the change is not backward-compatible. `MIGRATION_REQUIRED` additionally requires documented migration guidance.
 
 There is no owner, administrator, deployer privilege, trusted GitHub account, or repository allowlist. Any GitHub source is usable when its immutable commit, canonical tree entry, Git blob SHA-1, raw bytes, size, and SHA-256 commitment verify.
 
@@ -34,6 +34,6 @@ python -m pytest -q
 
 Target runtime: GenLayer `0.2.16`; deployment target: StudioNet chain ID `61999`.
 
-Live StudioNet contract: [`0xD0811B9873d579fAA18B64a9b47fF2BC6e0aEe31`](https://explorer-studio.genlayer.com/address/0xD0811B9873d579fAA18B64a9b47fF2BC6e0aEe31). Its deployed source is byte-for-byte identical to this repository. See the [StudioNet lifecycle evidence](verification/studionet-verification.md).
+The previous StudioNet deployment, `0xD0811B9873d579fAA18B64a9b47fF2BC6e0aEe31`, predates the steward-requested `COMPATIBLE` gate hardening and is retained only as historical evidence. Do not submit it as matching the current source. A replacement deployment and fresh lifecycle verification are required before resubmission.
 
 See [architecture](docs/ARCHITECTURE.md), [threat model](docs/THREAT_MODEL.md), [fixture manifest](verification/fixture-manifest.md), and [local verification](verification/local-verification.md).

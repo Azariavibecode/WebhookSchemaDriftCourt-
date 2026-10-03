@@ -176,7 +176,7 @@ class Contract(gl.Contract):
                         raise ValueError("finding")
                 if data["verdict"] == "BREAKING_CHANGE" and not (data["same_event"] and data["consumer_depends_on_target"] and not data["backward_compatible"]):
                     raise ValueError("breaking_gate")
-                if data["verdict"] == "COMPATIBLE" and not data["backward_compatible"]:
+                if data["verdict"] == "COMPATIBLE" and not (data["same_event"] and data["backward_compatible"]):
                     raise ValueError("compatible_gate")
                 if data["verdict"] == "MIGRATION_REQUIRED" and not (data["same_event"] and data["consumer_depends_on_target"] and not data["backward_compatible"] and data["migration_documented"]):
                     raise ValueError("migration_gate")

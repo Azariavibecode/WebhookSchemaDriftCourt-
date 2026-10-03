@@ -1,4 +1,6 @@
-# StudioNet verification
+# StudioNet verification — historical deployment
+
+> Superseded: the deployment below predates the steward-requested rule requiring `same_event=true` for `COMPATIBLE`. It must not be represented as matching the current patched source. Fresh deployment and lifecycle evidence will replace this section before resubmission.
 
 Verified on 2026-09-27 on GenLayer StudioNet, chain ID `61999`.
 

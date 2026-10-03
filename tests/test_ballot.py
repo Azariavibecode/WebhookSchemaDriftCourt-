@@ -63,6 +63,13 @@ def test_compatible_additive_field(setup):
     vm.mock_llm(r"Judge one webhook compatibility.*", result("COMPATIBLE", "SEMANTICALLY_EQUIVALENT", True, True, False))
     assert contract.assess_case(0) == "COMPATIBLE"
 
+def test_compatible_requires_same_event(setup):
+    vm, contract, _ = setup; prepared(vm, contract, "additive-optional", pointer="/data/customer_id")
+    vm.mock_llm(r"Judge one webhook compatibility.*", result("COMPATIBLE", "SEMANTICALLY_EQUIVALENT", True, False, False, same=False))
+    assert contract.assess_case(0) == "SOURCE_UNVERIFIED"
+    stored = json.loads(contract.get_case(0))
+    assert stored["state"] == "ASSESSED" and stored["verdict"] == "SOURCE_UNVERIFIED"
+
 def test_type_narrowing_breaks_consumer(setup):
     vm, contract, _ = setup; prepared(vm, contract, "type-narrowing", "shipment.updated", "/data/status")
     vm.mock_llm(r"Judge one webhook compatibility.*", result("BREAKING_CHANGE", "ENUM_CONTRACT_BROKEN", False, True, False))

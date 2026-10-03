@@ -6,7 +6,8 @@
 - A slot cannot be replaced or duplicated, and no snapshot can be added after sealing.
 - Missing slots prevent sealing; an unsealed or terminal case cannot be assessed.
 - Returned case identity and every consequential boolean are consensus-bound.
-- `BREAKING_CHANGE`, `COMPATIBLE`, and `MIGRATION_REQUIRED` each have deterministic semantic gates.
+- `COMPATIBLE` requires both `same_event=true` and `backward_compatible=true`; unrelated snapshots cannot receive a compatibility certificate.
+- `BREAKING_CHANGE` and `MIGRATION_REQUIRED` have their own deterministic semantic gates.
 - Malformed, contradictory, or unexpected AI output becomes `SOURCE_UNVERIFIED`.
 - No deployer, creator, source author, GitHub owner, or repository receives privileged authority.
 
