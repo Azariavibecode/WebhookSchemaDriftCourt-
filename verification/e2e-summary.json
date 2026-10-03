@@ -1,19 +1,10 @@
 {
-  "network":{"name":"StudioNet","chain_id":61999,"contract":"0xD0811B9873d579fAA18B64a9b47fF2BC6e0aEe31"},
-  "source_sha256":"a037b87b77dc1d865782186c3e2268007a9499513eeb8ee2edc044f3981b8c93",
-  "source_parity":true,
-  "actors":["0x67A1A08Fc4cf7D05c859d0d3D8398a3A30B1677e","0x7C87B10a3d43F3b3551414401F8b26B9F662bAB5"],
-  "counts":{"assessed_count":4,"case_count":4,"sealed_count":4},
-  "cases":[
-    {"case_id":0,"state":"ASSESSED","verdict":"BREAKING_CHANGE","reason_code":"FIELD_REMOVED","assessment_tx":"0x47106103b74c62441d6561dfdeb0dec7123efc232c989b110f18dbcd042080ba"},
-    {"case_id":1,"state":"ASSESSED","verdict":"COMPATIBLE","reason_code":"CONSUMER_NOT_AFFECTED","assessment_tx":"0xa1242fa416a3a01e58ec6e588bdf025ed9ad1d9c6a108e08001f01fc16ec0e20"},
-    {"case_id":2,"state":"ASSESSED","verdict":"MIGRATION_REQUIRED","reason_code":"MIGRATION_PATH_REQUIRED","assessment_tx":"0xb360c913118ef9dabccdd7b4ea48c9b6c697762aac1f3fe55daa2065602f68c0"},
-    {"case_id":3,"state":"ASSESSED","verdict":"SOURCE_UNVERIFIED","reason_code":"SOURCE_INTEGRITY_FAILURE","assessment_tx":"0x98beb77e1df99700fab1676599321b468af824dfc7209910988a5b3df01b54c5"}
-  ],
-  "guards":[
-    {"label":"post_seal_mutation","hash":"0x43213a420a197a8251b19eb6d97070bb2437f63405eddb96a403089d51c54782"},
-    {"label":"missing_case","hash":"0xd5d8fa098320ab184fbd23b92149263616d09de829bad9a5c40b90fe01b05613"},
-    {"label":"invalid_case","hash":"0x7741de3d5adf132ab0b213e00092d2a531ef3c35f9446457fda6c78eb2cab975"},
-    {"label":"terminal_replay","hash":"0x60f26eae37d7033e27a80ec2e301b92bda4d21322b18b7d6b1cfccec0ee0e334"}
-  ]
+  "chain_id": 61999,
+  "contract": "0x3FD9B3E4F28e299e4261B4c2D37D3d6CFAc45D87",
+  "source_parity": true,
+  "source_sha256": "7cdd8d05a7249156cf8929c59038732cc593abf0a68fd2be0ab2ea8f5326454a",
+  "canonical_counts": {"assessed_count": 8, "case_count": 8, "sealed_count": 8},
+  "compatible_control": {"case_id": 5, "state": "ASSESSED", "verdict": "COMPATIBLE", "confidence": "HIGH", "reason_code": "CONSUMER_NOT_AFFECTED", "assessment_tx": "0x96af0c61bea7d2b0044c83f386c878e76bfc6be903a5c499ed5e952d54bb2edf"},
+  "invalid_digest_control": {"case_id": 7, "state": "ASSESSED", "verdict": "SOURCE_UNVERIFIED", "reason_code": "SOURCE_INTEGRITY_FAILURE", "assessment_tx": "0x44fc8e09fbc2f6ccbc46912b7b2306e417349536af2ddeae769d629104f34f4b"},
+  "terminal_replay": {"tx": "0xc226a6116f961ef3eb28562b58de5548803bc2c91bc16e80f70a7db72106a5c7", "state_unchanged": true, "counts_unchanged": true}
 }

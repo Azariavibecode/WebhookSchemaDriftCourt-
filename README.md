@@ -34,6 +34,6 @@ python -m pytest -q
 
 Target runtime: GenLayer `0.2.16`; deployment target: StudioNet chain ID `61999`.
 
-The previous StudioNet deployment, `0xD0811B9873d579fAA18B64a9b47fF2BC6e0aEe31`, predates the steward-requested `COMPATIBLE` gate hardening and is retained only as historical evidence. Do not submit it as matching the current source. A replacement deployment and fresh lifecycle verification are required before resubmission.
+Replacement StudioNet contract: [`0x3FD9B3E4F28e299e4261B4c2D37D3d6CFAc45D87`](https://explorer-studio.genlayer.com/address/0x3FD9B3E4F28e299e4261B4c2D37D3d6CFAc45D87). Its deployed source is byte-for-byte identical to the patched repository source (`SHA-256 7cdd8d05a7249156cf8929c59038732cc593abf0a68fd2be0ab2ea8f5326454a`). See the [replacement StudioNet evidence](verification/studionet-verification.md).
 
 See [architecture](docs/ARCHITECTURE.md), [threat model](docs/THREAT_MODEL.md), [fixture manifest](verification/fixture-manifest.md), and [local verification](verification/local-verification.md).

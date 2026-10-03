@@ -35,7 +35,7 @@ const guard = async (action, label) => {
   if (JSON.stringify(before) !== JSON.stringify(after)) throw new Error(`${label} mutated counters`);
 };
 
-const owner = "Azaria723", repo = "WebhookSchemaDriftCourt", commit = "43e30aa751bfe422162288ed52a775232435a7a4";
+const owner = "Azariavibecode", repo = "WebhookSchemaDriftCourt-", commit = "fac73b836c0d2239ac7001159afc0c227f816c03";
 const source = (path, digest) => JSON.stringify({ owner, repo, commit, path, digest });
 const scenarios = [
   { name:"removed-field", event:"payment.completed", pointer:"/data/customer/id", allegation:"Removing the stable customer identifier may break the billing consumer at the registered pointer.", expected:"BREAKING_CHANGE", digests:["13c55dbd5369af183ff8d974d86063d18ac506cdaa280246f65473e648332dbe","e2d42a85aa352d11e9a2ac45d6ab77cd8aad1aeb635968e11d79072f1d2cb5a7","0352192f2e4070b369709843a2bb1c7a9407ba3d21c93e8d85a816fe5349ac28"] },
@@ -47,12 +47,14 @@ const slots = ["BEFORE_SCHEMA", "AFTER_SCHEMA", "CONSUMER_CONTRACT"];
 const files = ["before.json", "after.json", "consumer.md"];
 
 let counts = await parse("get_counts");
-for (let id = counts.case_count; id < scenarios.length; id++) {
-  const item = scenarios[id];
-  await write(wallets[id % 2], "register_case", [item.event, item.pointer, item.allegation], `register_${id}_${item.name}`);
+const baseId = counts.case_count;
+for (let index = 0; index < scenarios.length; index++) {
+  const item = scenarios[index];
+  await write(wallets[index % 2], "register_case", [item.event, item.pointer, item.allegation], `register_${baseId + index}_${item.name}`);
 }
-for (let id = 0; id < scenarios.length; id++) {
-  const item = scenarios[id];
+for (let index = 0; index < scenarios.length; index++) {
+  const id = baseId + index;
+  const item = scenarios[index];
   for (let index = 0; index < slots.length; index++) {
     const existing = await parse("get_snapshot", [BigInt(id), slots[index]]);
     if (existing.error) await write(wallets[(id + index) % 2], "bind_snapshot", [BigInt(id), slots[index], source(`/fixtures/${item.name}/${files[index]}`, item.digests[index])], `bind_${id}_${slots[index].toLowerCase()}`);
@@ -60,15 +62,16 @@ for (let id = 0; id < scenarios.length; id++) {
   let state = await parse("get_case", [BigInt(id)]);
   if (state.state === "REGISTERED") await write(wallets[(id + 1) % 2], "seal_case", [BigInt(id)], `seal_${id}`);
 }
-await guard(() => write(wallets[0], "bind_snapshot", [0n, "BEFORE_SCHEMA", source("/fixtures/removed-field/before.json", scenarios[0].digests[0])], "post_seal_mutation_guard"), "post-seal mutation");
+await guard(() => write(wallets[0], "bind_snapshot", [BigInt(baseId), "BEFORE_SCHEMA", source("/fixtures/removed-field/before.json", scenarios[0].digests[0])], "post_seal_mutation_guard"), "post-seal mutation");
 await guard(() => write(wallets[1], "seal_case", [999n], "missing_case_guard"), "missing case");
 await guard(() => write(wallets[0], "register_case", ["x", "bad", "This deliberately malformed case must not alter any state counter in the live contract."], "invalid_case_guard"), "invalid case");
-for (let id = 0; id < scenarios.length; id++) {
+for (let index = 0; index < scenarios.length; index++) {
+  const id = baseId + index;
   const state = await parse("get_case", [BigInt(id)]);
-  if (state.state === "ASSESSABLE") await write(wallets[(id + 1) % 2], "assess_case", [BigInt(id)], `assess_${id}_${scenarios[id].name}`);
+  if (state.state === "ASSESSABLE") await write(wallets[(index + 1) % 2], "assess_case", [BigInt(id)], `assess_${id}_${scenarios[index].name}`);
 }
-const cases = await Promise.all(scenarios.map((_, id) => parse("get_case", [BigInt(id)])));
-for (let id = 0; id < scenarios.length; id++) if (cases[id].verdict !== scenarios[id].expected) throw new Error(`case ${id} expected ${scenarios[id].expected}: ${JSON.stringify(cases[id])}`);
-await guard(() => write(wallets[1], "assess_case", [0n], "terminal_replay_guard"), "terminal replay");
+const cases = await Promise.all(scenarios.map((_, index) => parse("get_case", [BigInt(baseId + index)])));
+for (let index = 0; index < scenarios.length; index++) if (cases[index].verdict !== scenarios[index].expected) throw new Error(`case ${baseId + index} expected ${scenarios[index].expected}: ${JSON.stringify(cases[index])}`);
+await guard(() => write(wallets[1], "assess_case", [BigInt(baseId)], "terminal_replay_guard"), "terminal replay");
 counts = await parse("get_counts");
 console.log(JSON.stringify({ chainId: studionet.id, contract, wallets: wallets.map((w) => w.address), counts, cases, transactions }, null, 2));

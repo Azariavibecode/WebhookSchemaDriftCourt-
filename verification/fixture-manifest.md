@@ -1,6 +1,6 @@
 # Fixture manifest
 
-All fixtures are original synthetic public test sources created for this project. They demonstrate reproducibility and are not an allowlist; evaluators may register any independently verifiable GitHub commit. The immutable fixture revision is [`43e30aa751bfe422162288ed52a775232435a7a4`](https://github.com/Azaria723/WebhookSchemaDriftCourt/tree/43e30aa751bfe422162288ed52a775232435a7a4/fixtures).
+All fixtures are original synthetic public test sources created for this project. They demonstrate reproducibility and are not an allowlist; evaluators may register any independently verifiable GitHub commit. The active immutable fixture revision is [`fac73b836c0d2239ac7001159afc0c227f816c03`](https://github.com/Azariavibecode/WebhookSchemaDriftCourt-/tree/fac73b836c0d2239ac7001159afc0c227f816c03/fixtures). The previous `Azaria723` revision became unavailable and was correctly rejected as `SOURCE_UNVERIFIED` by the replacement deployment.
 
 | Path | Bytes | Git blob SHA-1 | SHA-256 |
 |---|---:|---|---|
